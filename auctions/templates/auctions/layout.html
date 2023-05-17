@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Auctions{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <h1 class="m-3 display-3">Auctions</h1>
+    <div class="m-3">
+      {% if user.is_authenticated %} Signed in as
+      <strong>{{ user.username }}</strong>. {% else %} Not signed in.
+      <!-- prettier-ignore -->
+      {% endif %}
+    </div>
+    <ul class="nav nav-tabs m-3">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:index' %}">Active Listings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:closedListings' %}">Closed Listings</a>
+      </li>
+      {% if user.is_authenticated %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:create_listing_view' %}">Create Listing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:categories' %}">Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info" href="{% url 'au:watchlist' %}">My Watchlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:logout' %}">Log Out</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:login' %}">Log In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au:register' %}">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+    {% block body %} {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+    <div class="list-group w-50 p-2">
+        <span href="#" class="list-group-item list-group-item-action active h4">
+          Watchlist
+        </span>
+        {% for auction in user_auction %}
+
+        <a href="{% url 'au:auction' id=auction.id %}" class="list-group-item list-group-item-action p-4"> {{ auction }}</a>
+
+        {% empty %}
+
+        <h4> Your watchlist is empty </h4>
+
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+{% endblock %}

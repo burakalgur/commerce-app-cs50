@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <div class="list-group w-50 p-2">
+
+        <span href="#" class="list-group-item list-group-item-action active h4 uppercase">
+            {{category_name}} Auctions
+        </span>
+
+        {% for item in category_items %}
+        <a href="{% url 'au:auction' id=item.id %}" class="list-group-item list-group-item-action p-4"> {{ item }}</a>
+        {% empty %}
+            No auctions found for this category
+        {% endfor %}
+
+      </div>
+
+{% endblock %}
